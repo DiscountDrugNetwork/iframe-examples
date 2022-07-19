@@ -25,14 +25,6 @@
 
         const iframe = document.getElementById("ddn-iframe");
 
-        iframe.onload = function (e) {
-          const frame = e.target;
-          frame.contentWindow.postMessage({
-            iframe: true,
-            groupId: "123456"
-          }, '*');
-        }
-
         // Message Event Handler
         function resizeIframe(e) {
           if (e.origin !== window.location.origin) {
