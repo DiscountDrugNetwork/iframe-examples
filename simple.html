@@ -3,11 +3,39 @@
     <title>Simple DDN Integration</title>
   </head>
   <body>
-    <a href="/advanced.html">Go to simple integration example &rarr;</a>
+    <a href="/advanced.html">Go to advanced integration example &rarr;</a>
     <h1>Simple DDN Integration</h1>
-    <iframe id='ddn-iframe' className='c-iframe'
-    src={https://discountdrugnetwork.com/plus?iframe=true} scrolling='no'
-    title='Discount Drug Network Prescription Medication Search' onLoad={onLoad}
-    ></iframe>
+    <div id="iframe__container">
+      <iframe
+        id="ddn-iframe"
+        src="https://www.discountdrugnetwork.com/plus?iframe=true"
+        scrolling="no"
+      >
+      </iframe>
+    </div>
+    <script type="text/javascript">
+      document.addEventListener("DOMContentLoaded", () => {
+        console.log("DOM ready!");
+
+        const iframe = document.getElementById("ddn-iframe");
+
+        iframe.onload = function (e) {
+          const frame = e.target;
+          frame.contentWindow.postMessage({
+            iframe: true,
+            groupId: "123456"
+          }, '*');
+        }
+
+        // Message Event Handler
+        function resizeIframe(e) {
+          if (e.origin !== window.location.origin) {
+            iframe.height = e.data + "px";
+          }
+        }
+
+        window.addEventListener("message", resizeIframe);
+      });
+    </script>
   </body>
 </html>
