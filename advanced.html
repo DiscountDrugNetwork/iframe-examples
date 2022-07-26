@@ -25,37 +25,35 @@
     <div id="iframe__container">
       <iframe
         id="ddn-iframe"
-        src="https://www.discountdrugnetwork.com/plus?iframe=true"
+        src="https://www.discountdrugnetwork.com/?iframe=true"
         scrolling="no"
       >
       </iframe>
     </div>
     <script type="text/javascript">
-      document.addEventListener("DOMContentLoaded", () => {
-        console.log("DOM ready!");
+     document.addEventListener("DOMContentLoaded", () => {
+       console.log("DOM ready!");
+  
+       const iframe = document.getElementById("ddn-iframe");
+  
+       iframe.onload = function (e) {
+         const frame = e.target;
+         frame.contentWindow.postMessage({
+           iframe: true,
+           groupId: "225RXA"
+         }, '*');
+       }
+  
+       // Message Event Handler
+       function resizeIframe(e) {
+         if (e.origin !== window.location.origin) {
+           iframe.height = e.data + "px";
+         }
+       }
+  
+       window.addEventListener("message", resizeIframe);
+     });
+   </script>
 
-        const iframe = document.getElementById("ddn-iframe");
-
-        iframe.onload = function (e) {
-          const frame = e.target;
-          frame.contentWindow.postMessage(
-            {
-              iframe: true,
-              groupId: "123456",
-            },
-            "*"
-          );
-        };
-
-        // Message Event Handler
-        function resizeIframe(e) {
-          if (e.origin !== window.location.origin) {
-            iframe.height = e.data + "px";
-          }
-        }
-
-        window.addEventListener("message", resizeIframe);
-      });
-    </script>
   </body>
 </html>
