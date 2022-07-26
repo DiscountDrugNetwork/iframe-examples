@@ -48,19 +48,13 @@
         };
 
         // Message Event Handler
-        let iframeDiv = document.querySelector("#ddn-iframe");
+        function resizeIframe(e) {
+          if (e.origin !== window.location.origin) {
+            iframe.height = e.data + "px";
+          }
+        }
 
-        window.addEventListener(
-          "message",
-          function (e) {
-            // message that was passed from iframe page
-            let message = e.data;
-
-            iframeDiv.style.height = message.height + "px";
-            iframeDiv.style.width = message.width + "px";
-          },
-          false
-        );
+        window.addEventListener("message", resizeIframe);
       });
     </script>
   </body>
