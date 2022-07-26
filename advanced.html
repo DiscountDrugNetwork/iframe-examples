@@ -48,7 +48,7 @@
         };
 
         // Message Event Handler
-        let iframe = document.querySelector("#ddn-iframe");
+        let iframeDiv = document.querySelector("#ddn-iframe");
 
         window.addEventListener(
           "message",
@@ -56,8 +56,8 @@
             // message that was passed from iframe page
             let message = e.data;
 
-            iframe.style.height = message.height + "px";
-            iframe.style.width = message.width + "px";
+            iframeDiv.style.height = message.height + "px";
+            iframeDiv.style.width = message.width + "px";
           },
           false
         );
