@@ -47,14 +47,12 @@
           );
         };
 
-        // Message Event Handler
-        function resizeIframe(e) {
-          if (e.origin !== window.location.origin) {
-            iframe.height = e.data + "px";
-          }
+        // Resize iFrame
+        var div = document.getElementById("ddn-iframe");
+        div.onload = function() {
+            div.style.height =
+              div.contentWindow.document.body.scrollHeight + 'px';
         }
-
-        window.addEventListener("message", resizeIframe);
       });
     </script>
   </body>
