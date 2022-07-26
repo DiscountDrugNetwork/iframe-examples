@@ -1,27 +1,24 @@
+<!DOCTYPE html>
 <html>
   <head>
-    <title>Real Time Health Pass DDN Integration</title>
-    <style>
-      #iframe__container {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        width: 100%;
-        margin-top: 4rem;
-      }
-      #ddn-iframe {
-        padding: 0;
-        width: 80%;
-        border: 1px solid #e9e9e9;
-        box-sizing: content-box;
-        overflow: hidden;
-        min-height: 450px;
-      }
-    </style>
+  <style>
+    #iframe__container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      margin-top: 4rem;
+    }
+    #ddn-iframe {
+      padding: 0;
+      width: 80%;
+      border: 1px solid #e9e9e9;
+      box-sizing: content-box;
+      overflow: hidden;
+    }
+  </style>
   </head>
   <body>
-    <a href="/live.html">Go to production integration example &rarr;</a>
-    <h1>Real Time Health Pass DDN Integration</h1>
     <div id="iframe__container">
       <iframe
         id="ddn-iframe"
@@ -31,29 +28,28 @@
       </iframe>
     </div>
     <script type="text/javascript">
-     document.addEventListener("DOMContentLoaded", () => {
-       console.log("DOM ready!");
-  
-       const iframe = document.getElementById("ddn-iframe");
-  
-       iframe.onload = function (e) {
-         const frame = e.target;
-         frame.contentWindow.postMessage({
-           iframe: true,
-           containerBgColor: "#fff"
-         }, '*');
-       }
-  
-       // Message Event Handler
-       function resizeIframe(e) {
-         if (e.origin !== window.location.origin) {
-           iframe.height = e.data + "px";
-         }
-       }
-  
-       window.addEventListener("message", resizeIframe);
-     });
-   </script>
+        document.addEventListener("DOMContentLoaded", () => {
+          console.log("DOM ready!");
 
+          const iframe = document.getElementById("ddn-iframe");
+
+          iframe.onload = function (e) {
+            const frame = e.target;
+            frame.contentWindow.postMessage({
+              iframe: true,
+      containerBgColor: “#fff”
+            }, '*');
+          }
+
+          // Message Event Handler
+          function resizeIframe(e) {
+            if (e.origin !== window.location.origin) {
+              iframe.height = e.data + "px";
+            }
+          }
+
+          window.addEventListener("message", resizeIframe);
+        });
+    </script>
   </body>
 </html>
