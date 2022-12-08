@@ -28,34 +28,23 @@
       >
       </iframe>
     </div>
-    <script type="text/javascript">
-      document.addEventListener("DOMContentLoaded", () => {
-        console.log("DOM ready!");
-
-        const iframe = document.getElementById("ddn-iframe");
-
-        iframe.onload = function (e) {
-          const frame = e.target;
-          frame.contentWindow.postMessage(
-            {
+    <script>
+      const messageHandler = (e) => {
+        if (e.origin === window.location.origin || !e.data) {
+          return
+        }
+        if (e.data) {
+          let frame = document.getElementById('ddn-iframe');
+          if (frame) {
+            frame.style.height = `${e.data}px`;
+            frame.contentWindow.postMessage({
               iframe: true,
-              groupId: "123TEST",
-              getDiscountButton: true,
-              containerBgColor: "#fff",
-            },
-            "*"
-          );
-        };
-
-        // Message Event Handler
-        function resizeIframe(e) {
-          if (e.origin !== window.location.origin) {
-            iframe.height = e.data + "px";
+              groupId: "DDN1234"
+            }, '*');
           }
         }
-
-        window.addEventListener("message", resizeIframe);
-      });
+      }
+      window.addEventListener('message', messageHandler);
     </script>
   </body>
 </html>
