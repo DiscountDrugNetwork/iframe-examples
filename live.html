@@ -1,50 +1,51 @@
 <html>
-  <head>
-    <title>Test DDN Integration</title>
-    <style>
-      #iframe__container {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        width: 100%;
-        margin-top: 4rem;
+
+<head>
+  <title>Test DDN Integration</title>
+  <style>
+    #iframe__container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      margin-top: 4rem;
+    }
+
+    #ddn-iframe {
+      padding: 0;
+      width: 100%;
+      border: 0px solid #E9E9E9;
+      box-sizing: content-box;
+      overflow: hidden;
+      min-height: 450px;
+      min-width: 375px;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>Test DDN Integration</h1>
+  <div id="iframe__container">
+    <iframe id="ddn-iframe" src="https://discountdrugnetwork.com/?iframe=true" scrolling="no"></iframe>
+  </div>
+  <script>
+    const messageHandler = (e) => {
+      if (e.origin === window.location.origin || !e.data) {
+        return
       }
-      #ddn-iframe {
-        padding: 0;
-        width: 100%;
-        border: 0px solid #e9e9e9;
-        box-sizing: content-box;
-        overflow: hidden;
-      }
-    </style>
-  </head>
-  <body>
-    <h1>Test DDN Integration</h1>
-    <div id="iframe__container">
-      <iframe
-        id="ddn-iframe"
-        src="https://discountdrugnetwork.com/?iframe=true"
-        scrolling="no"
-      >
-      </iframe>
-    </div>
-    <script>
-      const messageHandler = (e) => {
-        if (e.origin === window.location.origin || !e.data) {
-          return
+      if (e.data) {
+        let frame = document.getElementById('ddn-iframe');
+        if (frame) {
+          frame.style.height = `${e.data}px`;
+          frame.contentWindow.postMessage({
+            iframe: true,
+            groupId: "DDN1234"
+          }, '*');
         }
-        if (e.data) {
-          let frame = document.getElementById('ddn-iframe');
-          if (frame) {
-            frame.style.height = `${e.data}px`;
-            frame.contentWindow.postMessage({
-              iframe: true,
-              groupId: "DDN1234"
-            }, '*');
-          }
-        }
       }
-      window.addEventListener('message', messageHandler);
-    </script>
-  </body>
+    }
+    window.addEventListener('message', messageHandler);
+  </script>
+</body>
+
 </html>
