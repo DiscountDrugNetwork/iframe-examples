@@ -28,7 +28,7 @@
     <iframe id="ddn-iframe" src="https://ddn-search-fe.ddndev.com/?iframe=true" scrolling="no">
     </iframe>
   </div>
-  <script type="text/javascript">
+  <script>
     const messageHandler = (e) => {
       if (e.origin === window.location.origin || !e.data) {
         return
@@ -39,8 +39,7 @@
           frame.style.height = `${e.data}px`;
           frame.contentWindow.postMessage({
             iframe: true,
-            groupID: "DDN1234",
-            containerBgColor: "#e883de"
+            groupId: "DDN1234"
           }, '*');
         }
       }
