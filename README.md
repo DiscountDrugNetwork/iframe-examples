@@ -1,2 +1,2 @@
 # DDN iFrame Examples
-View this here: https://embed.discountdrugnetwork.com
+View this here: https://iframe.discountdrugnetwork.com
